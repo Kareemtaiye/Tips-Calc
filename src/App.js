@@ -16,7 +16,7 @@ function App() {
 
   const tipService = bill * (service / 100);
   const tipFriendService = bill * (friendService / 100);
-  const totalTips = tipService + tipFriendService;
+  const totalTips = Math.round(tipService + tipFriendService);
   const totalBill = bill + totalTips;
 
   function handleResetTip() {
@@ -27,11 +27,11 @@ function App() {
 
   return (
     <main>
-      <Inputs sateVal={bill} setState={setBill} />
+      <Inputs stateVal={bill} setState={setBill} />
 
       <Selections
         text="How did you like the service"
-        sateVal={service}
+        stateVal={service}
         arr={serviceOpt}
         setState={setService}
       />
@@ -59,7 +59,7 @@ function Inputs({ setState, stateVal }) {
       <input
         value={stateVal}
         onChange={(e) => setState(Number(e.target.value))}
-        type="text"
+        type="number"
       />
     </div>
   );
@@ -87,7 +87,7 @@ function Total({ totalTips, totalBill, bill }) {
   return (
     <div>
       <h2>
-        You pay ${totalBill} (${bill} + ${totalTips} tip)
+        You'll pay ${totalBill} (${bill} + ${totalTips} tip)
       </h2>
     </div>
   );
